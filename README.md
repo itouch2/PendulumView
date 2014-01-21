@@ -3,7 +3,7 @@ PendulumView
 
 Pendulum balls inspired by [Jordi Verdu](http://dribbble.com/shots/963799-Animation-Loading-gif?list=searches&tag=loading).
 
-The color of balls is customizable, and it will start animating once it shows in the view.
+The color of balls is customizable, and it will start animating once it shows up in the view.
 
 It could be used as an indicator of an empty loading page, or just for fun.
 
