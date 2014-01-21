@@ -10,8 +10,8 @@
 
 static const NSUInteger ballCount = 7;
 static const CGFloat ballSize = 14;
-static const float ballPendulateRadiusFactor = 3.5;
-static const float ballPendulateAngle = M_PI_2 / 2;
+static const float ballPendulateRadiusFactor = 1.5;
+static const float ballPendulateAngle = M_PI_2 / 1;
 
 @interface PendulumView ()
 
@@ -21,7 +21,7 @@ static const float ballPendulateAngle = M_PI_2 / 2;
 
 @property (nonatomic, strong) NSMutableArray *reflectionBalls;
 @property (nonatomic, strong) UIView *leftReflectionBall;
-@property (nonatomic ,strong) UIView *rightRefelctionBall;
+@property (nonatomic ,strong) UIView *rightReflectionBall;
 
 @property (nonatomic, strong) UIColor *ballColor;
 
@@ -112,7 +112,7 @@ static const float ballPendulateAngle = M_PI_2 / 2;
     }
     
     self.leftReflectionBall = self.reflectionBalls[0];
-    self.rightRefelctionBall = self.reflectionBalls[ballCount - 1];
+    self.rightReflectionBall = self.reflectionBalls[ballCount - 1];
 }
 
 - (UIView *)ball
@@ -160,7 +160,7 @@ static const float ballPendulateAngle = M_PI_2 / 2;
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^{
                          self.rigthBall.transform = CGAffineTransformMakeRotation(-ballPendulateAngle);
-                         self.rightRefelctionBall.frame = CGRectMake(self.rightRefelctionBall.frame.origin.x + self.offset, self.rightRefelctionBall.frame.origin.y, self.rightRefelctionBall.frame.size.width, self.rightRefelctionBall.frame.size.height);
+                         self.rightReflectionBall.frame = CGRectMake(self.rightReflectionBall.frame.origin.x + self.offset, self.rightReflectionBall.frame.origin.y, self.rightReflectionBall.frame.size.width, self.rightReflectionBall.frame.size.height);
                      }
                      completion:^(BOOL finished) {
                          [UIView animateWithDuration:0.2
@@ -168,7 +168,7 @@ static const float ballPendulateAngle = M_PI_2 / 2;
                                              options:UIViewAnimationOptionCurveEaseIn
                                           animations:^{
                                               self.rigthBall.transform = CGAffineTransformMakeRotation(0);
-                                              self.rightRefelctionBall.frame = CGRectMake(self.rightRefelctionBall.frame.origin.x - self.offset, self.rightRefelctionBall.frame.origin.y, self.rightRefelctionBall.frame.size.width, self.rightRefelctionBall.frame.size.height);
+                                              self.rightReflectionBall.frame = CGRectMake(self.rightReflectionBall.frame.origin.x - self.offset, self.rightReflectionBall.frame.origin.y, self.rightReflectionBall.frame.size.width, self.rightReflectionBall.frame.size.height);
                                           } completion:^(BOOL finished) {
                                               if (_shouldAnimate)
                                               {
