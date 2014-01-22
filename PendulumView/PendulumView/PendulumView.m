@@ -134,6 +134,7 @@ static const float ballPendulateAngle = M_PI_2 / 1;
                      animations:^{
                          self.leftBall.transform = CGAffineTransformMakeRotation(ballPendulateAngle);
                          self.leftReflectionBall.frame = CGRectMake(self.leftReflectionBall.frame.origin.x - self.offset, self.leftReflectionBall.frame.origin.y, self.leftReflectionBall.frame.size.width, self.leftReflectionBall.frame.size.height);
+                         self.leftReflectionBall.alpha = 0.0f;
                      }
                      completion:^(BOOL finished) {
                          [UIView animateWithDuration:0.2
@@ -142,6 +143,7 @@ static const float ballPendulateAngle = M_PI_2 / 1;
                                           animations:^{
                                               self.leftBall.transform = CGAffineTransformMakeRotation(0);
                                               self.leftReflectionBall.frame = CGRectMake(self.leftReflectionBall.frame.origin.x + self.offset, self.leftReflectionBall.frame.origin.y, self.leftReflectionBall.frame.size.width, self.leftReflectionBall.frame.size.height);
+                                              self.leftReflectionBall.alpha = 1.0f;
                                           } completion:^(BOOL finished) {
                                               if (_shouldAnimate)
                                               {
@@ -161,6 +163,7 @@ static const float ballPendulateAngle = M_PI_2 / 1;
                      animations:^{
                          self.rigthBall.transform = CGAffineTransformMakeRotation(-ballPendulateAngle);
                          self.rightReflectionBall.frame = CGRectMake(self.rightReflectionBall.frame.origin.x + self.offset, self.rightReflectionBall.frame.origin.y, self.rightReflectionBall.frame.size.width, self.rightReflectionBall.frame.size.height);
+                         self.rightReflectionBall.alpha = 0.0f;
                      }
                      completion:^(BOOL finished) {
                          [UIView animateWithDuration:0.2
@@ -169,6 +172,7 @@ static const float ballPendulateAngle = M_PI_2 / 1;
                                           animations:^{
                                               self.rigthBall.transform = CGAffineTransformMakeRotation(0);
                                               self.rightReflectionBall.frame = CGRectMake(self.rightReflectionBall.frame.origin.x - self.offset, self.rightReflectionBall.frame.origin.y, self.rightReflectionBall.frame.size.width, self.rightReflectionBall.frame.size.height);
+                                              self.rightReflectionBall.alpha = 1.0f;
                                           } completion:^(BOOL finished) {
                                               if (_shouldAnimate)
                                               {
