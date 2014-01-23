@@ -9,7 +9,7 @@
 #import "PendulumView.h"
 
 static const NSUInteger ballCount = 7;
-static const CGFloat ballSize = 14;
+static const CGFloat defaultBallDiameter = 14;
 static const float ballPendulateRadiusFactor = 1.5;
 static const float ballPendulateAngle = M_PI_2 / 1;
 
@@ -24,6 +24,7 @@ static const float ballPendulateAngle = M_PI_2 / 1;
 @property (nonatomic ,strong) UIView *rightReflectionBall;
 
 @property (nonatomic, strong) UIColor *ballColor;
+@property (nonatomic, assign) CGFloat ballDiameter;
 
 @property (nonatomic, assign) float offset;
 
@@ -43,12 +44,29 @@ static const float ballPendulateAngle = M_PI_2 / 1;
 
 - (id)initWithFrame:(CGRect)frame ballColor:(UIColor *)ballColor
 {
+    return [self initWithFrame:frame ballColor:ballColor ballDiameter:defaultBallDiameter];
+}
+
+- (id)initWithFrame:(CGRect)frame ballColor:(UIColor *)ballColor ballDiameter:(CGFloat)ballDiameter
+{
     self = [super initWithFrame:frame];
     if (self)
     {
         self.ballColor = ballColor;
         
-        self.offset = sin(ballPendulateAngle) * (ballPendulateRadiusFactor + 0.5) * ballSize;
+        if (ballDiameter < 0)
+        {
+            ballDiameter = defaultBallDiameter;
+        }
+        
+        if (ballDiameter > CGRectGetWidth(frame) / ballCount)
+        {
+            ballDiameter = CGRectGetWidth(frame) / ballCount;
+        }
+        
+        self.ballDiameter = ballDiameter;
+        
+        self.offset = sin(ballPendulateAngle) * (ballPendulateRadiusFactor + 0.5) * self.ballDiameter;
         
         [self createBalls];
         [self createReflection];
@@ -64,17 +82,17 @@ static const float ballPendulateAngle = M_PI_2 / 1;
     self.balls = [NSMutableArray array];
     
     CGFloat width = CGRectGetWidth(self.frame);
-    CGFloat xPos = width / 2 - (ballCount / 2 + 0.5) * ballSize;
-    CGFloat yPos = CGRectGetHeight(self.frame) / 2 - ballSize / 2;
+    CGFloat xPos = width / 2 - (ballCount / 2 + 0.5) * self.ballDiameter;
+    CGFloat yPos = CGRectGetHeight(self.frame) / 2 - self.ballDiameter / 2;
     
     for (int i = 0; i < ballCount; i++)
     {
         UIView *ball = [self ball];
-        ball.frame = CGRectMake(xPos, yPos, ballSize, ballSize);
+        ball.frame = CGRectMake(xPos, yPos, self.ballDiameter, self.ballDiameter);
         [self addSubview:ball];
         [self.balls addObject:ball];
         
-        xPos += ballSize;
+        xPos += self.ballDiameter;
     }
     
     self.leftBall = self.balls[0];
@@ -86,13 +104,13 @@ static const float ballPendulateAngle = M_PI_2 / 1;
     self.reflectionBalls = [NSMutableArray array];
     
     CGFloat width = CGRectGetWidth(self.frame);
-    CGFloat xPos = width / 2 - (ballCount / 2 + 0.5) * ballSize;
-    CGFloat yPos = CGRectGetHeight(self.frame) / 2 + ballSize / 2 + 5;
+    CGFloat xPos = width / 2 - (ballCount / 2 + 0.5) * self.ballDiameter;
+    CGFloat yPos = CGRectGetHeight(self.frame) / 2 + self.ballDiameter / 2 + 5;
     
     for (int i = 0; i < ballCount; i++)
     {
         UIView *reflectionBall = [self ball];
-        reflectionBall.frame = CGRectMake(xPos, yPos, ballSize, ballSize);
+        reflectionBall.frame = CGRectMake(xPos, yPos, self.ballDiameter, self.ballDiameter);
         reflectionBall.transform = CGAffineTransformMakeRotation(M_PI);
         
         CAGradientLayer *gradient = [CAGradientLayer layer];
@@ -108,7 +126,7 @@ static const float ballPendulateAngle = M_PI_2 / 1;
     
         [self.reflectionBalls addObject:reflectionBall];
         
-        xPos += ballSize;
+        xPos += self.ballDiameter;
     }
     
     self.leftReflectionBall = self.reflectionBalls[0];
@@ -117,9 +135,9 @@ static const float ballPendulateAngle = M_PI_2 / 1;
 
 - (UIView *)ball
 {
-    UIView *ball = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ballSize, ballSize)];
+    UIView *ball = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.ballDiameter, self.ballDiameter)];
     ball.backgroundColor = self.ballColor;
-    ball.layer.cornerRadius = ballSize / 2;
+    ball.layer.cornerRadius = self.ballDiameter / 2;
     ball.clipsToBounds = YES;
     return ball;
 }
@@ -224,6 +242,16 @@ static const float ballPendulateAngle = M_PI_2 / 1;
 
     _animating = NO;
     _shouldAnimate = NO;
+    
+    if (_hidesWhenStopped)
+    {
+        // fade out to disappear
+        [UIView animateWithDuration:0.2 animations:^{
+            self.alpha = 0.0f;
+        } completion:^(BOOL finished) {
+            [self removeFromSuperview];
+        }];
+    }
 }
 
 - (BOOL)isAnimating

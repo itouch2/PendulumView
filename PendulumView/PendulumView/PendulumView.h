@@ -10,8 +10,11 @@
 
 @interface PendulumView : UIView
 
+@property (nonatomic, assign) BOOL hidesWhenStopped;
+
 - (id)initWithFrame:(CGRect)frame;
 - (id)initWithFrame:(CGRect)frame ballColor:(UIColor *)ballColor;
+- (id)initWithFrame:(CGRect)frame ballColor:(UIColor *)ballColor ballDiameter:(CGFloat)ballDiameter;
 
 - (void)startAnimating;
 - (void)stopAnimating;
