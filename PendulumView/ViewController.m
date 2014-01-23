@@ -21,7 +21,7 @@
 	// Do any additional setup after loading the view, typically from a nib.
     
     UIColor *ballColor = [UIColor colorWithRed:0.47 green:0.60 blue:0.89 alpha:1];
-    PendulumView *pendulum = [[PendulumView alloc] initWithFrame:self.view.bounds ballColor:ballColor ballDiameter:8];
+    PendulumView *pendulum = [[PendulumView alloc] initWithFrame:self.view.bounds ballColor:ballColor ballDiameter:12];
     [self.view addSubview:pendulum];
 }
 
