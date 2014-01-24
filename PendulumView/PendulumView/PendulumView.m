@@ -52,6 +52,8 @@ static const float ballPendulateAngle = M_PI_2 / 1;
     self = [super initWithFrame:frame];
     if (self)
     {
+        self.hidesWhenStopped = YES;
+        
         self.ballColor = ballColor;
         
         if (ballDiameter < 0)
