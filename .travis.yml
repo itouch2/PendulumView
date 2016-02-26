@@ -1,6 +1,6 @@
 language: objective-c
+osx_image: xcode7.2
 xcode_project: PendulumView.xcodeproj
 xcode_scheme: PendulumView
-osx_image: xcode7.2
 xcode_sdk:
   - iPhoneSimulator9.2
