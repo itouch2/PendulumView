@@ -1,8 +1,4 @@
-language: objective-c
-osx_image: xcode7.2
-script:
-  - xcodebuild [DEFAULT_OPTIONS] CODE_SIGNING_REQUIRED=NO
 xcode_project: PendulumView.xcodeproj
 xcode_scheme: PendulumView
 xcode_sdk:
-  - /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk
+  - iphonesimulator8.4
