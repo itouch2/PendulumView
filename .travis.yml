@@ -1,0 +1,5 @@
+language: objective-c
+xcode_project: PendulumView.xcodeproj
+xcode_scheme: PendulumView
+xcode_sdk:
+  - iphonesimulator9.0
