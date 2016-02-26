@@ -3,6 +3,8 @@ PendulumView
 
 Pendulum balls inspired by [Jordi Verdu](http://dribbble.com/shots/963799-Animation-Loading-gif?list=searches&tag=loading).
 
+[![Build Status](https://travis-ci.org/itouch2/PendulumView.svg)](https://travis-ci.org/itouch2/PendulumView)
+
 The color and diameter of the pendulum balls are customizable, and it will start animating once it shows up in the view.
 
 It could be used as an indicator of an empty loading page, or just for fun.
